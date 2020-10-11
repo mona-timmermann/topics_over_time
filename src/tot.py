@@ -29,18 +29,18 @@ class TopicsOverTime:
 		timestamps = []
 		dictionary = set()
 		stopwords = set()
-		for line in fileinput.input(stopwords_path):
-			stopwords.update(set(line.lower().strip().split()))
+		#for line in fileinput.input(stopwords_path):
+		#	stopwords.update(set(line.lower().strip().split()))
 		for doc in fileinput.input(documents_path):
-			words = [word for word in doc.lower().strip().split() if word not in stopwords]
+			words = [word for word in doc.lower().strip().split()] # if word not in stopwords]
 			documents.append(words)
 			dictionary.update(set(words))
 		for timestamp in fileinput.input(timestamps_path):
 			num_titles = int(timestamp.strip().split()[0])
 			timestamp = float(timestamp.strip().split()[1])
 			timestamps.extend([timestamp for title in range(num_titles)])
-		for line in fileinput.input(stopwords_path):
-			stopwords.update(Set(line.lower().strip().split()))
+		#for line in fileinput.input(stopwords_path):
+		#	stopwords.update(Set(line.lower().strip().split()))
 		first_timestamp = timestamps[0]
 		last_timestamp = timestamps[len(timestamps)-1]
 		timestamps = [1.0*(t-first_timestamp)/(last_timestamp-first_timestamp) for t in timestamps]
